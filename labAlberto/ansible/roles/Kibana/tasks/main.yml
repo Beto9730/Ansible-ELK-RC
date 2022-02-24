@@ -1,0 +1,4 @@
+---
+# tasks file for Kibana
+
+- include: install.yml 

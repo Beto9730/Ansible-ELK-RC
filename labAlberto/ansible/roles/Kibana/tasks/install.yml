@@ -1,0 +1,30 @@
+---
+- name: Descargamos Kibana
+  shell: wget https://artifacts.elastic.co/downloads/kibana/kibana-7.16.3-x86_64.rpm
+
+- name: Copiar kibana.repo 
+  become: yes
+  copy:
+        src: kibana.repo
+        dest: /etc/yum.repos.d/kibana.repo
+        mode: '0644'
+        owner: root
+        group: root
+
+- name: Install kibana
+  yum:
+    name: kibana-7.16.3-x86_64.rpm
+    state: present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+  
+- name: Iniciar el servicio de kibana
+  become: yes
+  systemd:
+        state: started
+        name: kibana.service
+
+- name: Enable el servicio de kibana
+  become: yes
+  service:
+        name: kibana.service
+        enabled: yes

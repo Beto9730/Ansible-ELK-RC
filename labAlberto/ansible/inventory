@@ -1,0 +1,13 @@
+[bastion-ELK]
+10.0.0.11
+
+[elasticsearch]
+10.0.0.12
+
+[logstash]
+10.0.0.13
+
+[kibana]
+192.168.1.14
+
+

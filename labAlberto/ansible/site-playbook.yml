@@ -1,0 +1,24 @@
+---
+- name : site-playbook.yml
+  hosts: bastion-ELK
+  become: yes
+  roles: 
+  - bastion-ELK
+  
+- name : site-playbook.yml
+  hosts: elasticsearch
+  become: yes
+  roles: 
+  - Elasticsearh
+
+- name : site-playbook.yml
+  hosts: logstash
+  become: yes
+  roles: 
+  - Logstash
+
+- name : site-playbook.yml
+  hosts: kibana
+  become: yes
+  roles: 
+  - Kibana

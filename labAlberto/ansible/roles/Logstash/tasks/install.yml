@@ -1,0 +1,40 @@
+---
+- name: Descargamos logstash
+  shell: wget https://artifacts.elastic.co/GPG-KEY-elasticsearch 
+
+- name: Copiar logstash.repo 
+  become: yes
+  copy:
+        src: logstash.repo
+        dest: /etc/yum.repos.d/logstash.repo
+        mode: '0644'
+        owner: root
+        group: root
+
+- name: Copiar syslog.conf
+  become: yes
+  copy:
+        src: syslog.conf
+        dest: /etc/logstash/conf.d/syslog.conf
+        mode: '0644'
+        owner: root
+        group: root
+
+- name: Install logstash
+  yum:
+    name: logstash
+    state: present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
+  
+- name: Iniciar el servicio de logstash
+  become: yes
+  systemd:
+        state: started
+        name: logstash.service
+
+- name: Enable el servicio de logstash
+  become: yes
+  service:
+        name: logstash.service
+        enabled: yes
+  

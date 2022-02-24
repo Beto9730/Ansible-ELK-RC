@@ -1,0 +1,23 @@
+---
+- name: colocar clave en elasticsearch
+  authorized_key:
+    user: vagrant
+    state: present
+    key: "{{ lookup('file', '/home/vagrant/.ssh/id_rsa.pub') }}"
+    path: /home/vagrant/.ssh/authorized_keys/vagrant
+    manage_dir: False 
+
+- name: copiar sshd_config
+  become: yes
+  copy:
+        src: sshd_config
+        dest: /etc/ssh/sshd_config
+        mode: '0644'
+        owner: root
+        group: root
+
+- name: reiniciar el servicio de sshd
+  become: yes
+  systemd:
+        state: restarted
+        name: sshd

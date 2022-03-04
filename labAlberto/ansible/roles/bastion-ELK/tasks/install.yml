@@ -1,4 +1,7 @@
 ---
+- name: Genera la llave publica automatico
+  ansible.builtin.shell: ssh-keygen -q -t rsa -N '' -f home/vagrant/.ssh/id_rsa -y
+
 - name: Set up multiple authorized keys
   authorized_key:
     user: vagrant
@@ -6,7 +9,7 @@
     key: '{{ item }}'
   with_file:
     - keyvm4
-    
+
 # - name: copiar sshd_config
 #   become: yes
 #   copy:

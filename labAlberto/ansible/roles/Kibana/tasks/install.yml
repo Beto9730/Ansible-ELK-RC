@@ -1,4 +1,9 @@
 ---
+- name: Install Wget
+  yum:
+    name: wget
+    state: present
+
 - name: Descargamos Kibana
   shell: wget https://artifacts.elastic.co/downloads/kibana/kibana-7.16.3-x86_64.rpm
 

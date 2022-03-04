@@ -1,5 +1,4 @@
 ---
 # tasks file for bastion-ELK
 
-- include: installjava.yml
 - include: install.yml 

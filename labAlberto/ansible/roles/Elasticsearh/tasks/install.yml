@@ -1,6 +1,11 @@
 ---
+- name: Install Wget
+  yum:
+    name: wget
+    state: present
+
 - name: Descargamos e instalamos elastic
-  shell: wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.16.3-x86_64.rpm 
+  shell: wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.0.1-x86_64.rpm 
 
 - name: Copiar elasticsearch.repo 
   become: yes
@@ -13,10 +18,9 @@
 
 - name: Install elastic
   yum:
-    name: elasticsearch-7.16.3-x86_64.rpm
+    name: elasticsearch-8.0.1-x86_64.rpm
     state: present
-  when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
-  
+ 
 - name: Iniciar el servicio de Elasticsearch
   become: yes
   systemd:
@@ -28,6 +32,4 @@
   service:
         name: elasticsearch.service
         enabled: yes
-
-
 

@@ -4,7 +4,7 @@ Vagrant.configure(2) do |config|
 #### CUANTAS MAQUINAS VIRTUALES QUIERES CREAR?
 VM_NUMBER=4
 #### CUANTOS DISCOS QUIERES QUE TENGA CADA VM?
-DISK_NUMBER=10
+DISK_NUMBER=0
   (1..VM_NUMBER).each do |i|
     config.vm.define "vm#{i}" do |node|
         node.vm.box = "centos/7"
@@ -17,15 +17,36 @@ DISK_NUMBER=10
         if i==1
           node.vm.network "forwarded_port", guest: 80, host: "80"
         end
-        node.vm.provider "virtualbox" do |vb|
-        if i==0
-          vb.memory = "128"
+          node.vm.provider "virtualbox" do |vb|
+        if i==2
+          vb.memory = "1500"
         else
-          vb.memory = "128"
+          vb.memory = "350"
         end
-          vb.cpus = 1
-      vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata", "--controller", "IntelAHCI"]
+        if i==4
+          node.vm.provision "shell", inline: <<-SHELL
+            echo "instalando wget"
+            sudo yum install wget -y
 
+            echo "descargando ansible"
+            sudo wget https://releases.ansible.com/ansible/rpm/release/epel-7-x86_64/ansible-2.5.7-1.el7.ans.noarch.rpm    
+
+            echo "instalando de manera local ansible"
+            sudo yum localinstall ansible-2.5.7-1.el7.ans.noarch.rpm -y
+
+            echo "check ansible version"
+            sudo ansible --version
+
+            echo "instalando playbook"
+            cd /vagrant/ansible && ansible-playbook -i inventory site-playbook.yml -k
+          SHELL
+        end
+          node.vm.provision "shell", inline: <<-SHELL
+            sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+            systemctl restart sshd.service
+          SHELL
+          vb.cpus = 1
+      vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata", "--controller", "IntelAHCI"] 
   ######
         (0..DISK_NUMBER).each do |p|
           d=p

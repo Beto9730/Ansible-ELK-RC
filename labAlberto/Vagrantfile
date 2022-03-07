@@ -39,10 +39,12 @@ DISK_NUMBER=0
 
             echo "instalando playbook"
             cd /vagrant/ansible && ansible-playbook -i inventory site-playbook.yml -k
+
+            echo "generando llave publica"
+            ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa.pub
           SHELL
         end
           node.vm.provision "shell", inline: <<-SHELL
-            ssh-keygen -q -t rsa -N '' -f home/vagrant/.ssh/id_rsa -y
             systemctl restart sshd.service
             sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
           SHELL

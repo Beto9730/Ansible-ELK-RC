@@ -42,8 +42,9 @@ DISK_NUMBER=0
           SHELL
         end
           node.vm.provision "shell", inline: <<-SHELL
-            sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+            ssh-keygen -q -t rsa -N '' -f home/vagrant/.ssh/id_rsa -y
             systemctl restart sshd.service
+            sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
           SHELL
           vb.cpus = 1
       vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata", "--controller", "IntelAHCI"] 

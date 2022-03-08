@@ -22,7 +22,7 @@ NOTA: Luego de este paso nos conectaremos al nodo, tendremos que salir con "exit
 ```
 4. Nos dirijimos a /vagrant/ansible y ejecutamos en playbook
 ```
-ansible-playbook -i inventory site-playbook.yml -k
+ansible-playbook -i inventory site-playbook.yml
 ```
 
 

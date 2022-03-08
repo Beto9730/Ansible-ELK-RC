@@ -37,16 +37,21 @@ DISK_NUMBER=0
             echo "check ansible version"
             sudo ansible --version
 
-            echo "instalando playbook"
-            cd /vagrant/ansible && ansible-playbook -i inventory site-playbook.yml -k
-
             echo "generando llave publica"
-            ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa.pub
+            su - vagrant -c "ssh-keygen -q -t rsa -N '' -f /home/vagrant/.ssh/id_rsa"
+
+            echo "validando si se creo llave public"
+            cat /home/vagrant/.ssh/id_rsa.pub
+
+            echo "instalando playbook"
+            cd /vagrant/ansible && ansible-playbook -i inventory site-playbook.yml
+            sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+            systemctl restart sshd.service
           SHELL
         end
           node.vm.provision "shell", inline: <<-SHELL
-            systemctl restart sshd.service
             sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
+            systemctl restart sshd.service
           SHELL
           vb.cpus = 1
       vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata", "--controller", "IntelAHCI"] 

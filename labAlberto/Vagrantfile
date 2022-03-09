@@ -43,8 +43,10 @@ DISK_NUMBER=0
             echo "validando si se creo llave public"
             cat /home/vagrant/.ssh/id_rsa.pub
 
-            echo "instalando playbook"
+            echo "corriendo playbook"
             cd /vagrant/ansible && ansible-playbook -i inventory site-playbook.yml
+            
+            echo "reiniciando servicio sshd"
             sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
             systemctl restart sshd.service
           SHELL

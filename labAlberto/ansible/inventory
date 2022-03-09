@@ -1,13 +1,14 @@
 [elasticsearch]
-10.0.0.12 ansible_user=vagrant ansible_ssh_pass=vagrant
+10.0.0.12 ansible_user=vagrant ansible_ssh_pass=vagrant 
 
 [logstash]
-10.0.0.11 ansible_user=vagrant ansible_ssh_pass=vagrant
+10.0.0.11 ansible_user=vagrant ansible_ssh_pass=vagrant 
 
 [kibana]
-10.0.0.13 ansible_user=vagrant ansible_ssh_pass=vagrant
+10.0.0.13 ansible_user=vagrant ansible_ssh_pass=vagrant 
 
 [bastion-ELK]
-10.0.0.14 ansible_user=vagrant ansible_ssh_pass=vagrant
+10.0.0.14 ansible_user=vagrant ansible_ssh_pass=vagrant 
+
 
 

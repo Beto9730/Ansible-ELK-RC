@@ -5,7 +5,7 @@
     state: present
 
 - name: Descargamos Kibana
-  shell: wget https://artifacts.elastic.co/downloads/kibana/kibana-7.16.3-x86_64.rpm
+  shell: wget https://artifacts.elastic.co/downloads/kibana/kibana-7.17.1-x86_64.rpm
 
 - name: Copiar kibana.repo 
   become: yes
@@ -18,7 +18,7 @@
 
 - name: Install kibana
   yum:
-    name: kibana-7.16.3-x86_64.rpm
+    name: kibana-7.17.1-x86_64.rpm
     state: present
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'RedHat'
   

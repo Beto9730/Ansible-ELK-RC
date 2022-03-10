@@ -33,4 +33,26 @@
   service:
         name: logstash.service
         enabled: yes
+
+- name: Crear un archivo de configuracion
+  shell: cd /etc/logstash/conf.d/ && touch syslog.conf
+
+- name: Copiar syslog.conf 
+  become: yes
+  copy:
+        src: syslog.conf
+        dest: /etc/logstash/conf.d/syslog.conf
+        mode: '0644'
+        owner: root
+        group: root
+
+- name: Otorgar permisos de lectura
+  shell: setfacl -m u:logstash:r /var/log/messages
+
+- name: Reiniciar el servicio de logstash
+  become: yes
+  systemd:
+        state: restarted
+        name: logstash.service
+
   

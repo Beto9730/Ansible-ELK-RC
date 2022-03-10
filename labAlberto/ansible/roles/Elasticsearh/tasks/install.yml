@@ -5,7 +5,7 @@
     state: present
 
 - name: Descargamos e instalamos elastic
-  shell: wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.0.1-x86_64.rpm 
+  shell: wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.17.1-x86_64.rpm 
 
 - name: Copiar elasticsearch.repo 
   become: yes
@@ -18,7 +18,7 @@
 
 - name: Install elastic
   yum:
-    name: elasticsearch-8.0.1-x86_64.rpm
+    name: elasticsearch-7.17.1-x86_64.rpm
     state: present
  
 - name: Iniciar el servicio de Elasticsearch

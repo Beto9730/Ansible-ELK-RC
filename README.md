@@ -146,7 +146,7 @@ echo "reiniciando servicio sshd"
 ```
 Fuentes:
 
-https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-sheet-guide  / Relacion de Confianza
-https://www.vagrantup.com/docs/networking/forwarded_ports / Vagrant, forwardear puerto 
-https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html / Ansible, todo los modulos
-https://vagrant-intro.readthedocs.io/es/latest/aprovisionamiento.html / Vagrant, aprovisionamiento
+- https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-sheet-guide  / Relacion de Confianza
+- https://www.vagrantup.com/docs/networking/forwarded_ports / Vagrant, forwardear puerto 
+- https://docs.ansible.com/ansible/2.9/modules/list_of_all_modules.html / Ansible, todo los modulos
+- https://vagrant-intro.readthedocs.io/es/latest/aprovisionamiento.html / Vagrant, aprovisionamiento

@@ -33,3 +33,18 @@
   service:
         name: kibana.service
         enabled: yes
+
+- name: Copiar kibana.yml
+  become: yes
+  copy:
+        src: kibana.yml
+        dest: /etc/kibana/kibana.yml
+        mode: '0644'
+        owner: root
+        group: root
+
+- name: Reiniciar el servicio de Kibana
+  become: yes
+  systemd:
+        state: restarted
+        name: kibana.service

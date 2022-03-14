@@ -33,3 +33,17 @@
         name: elasticsearch.service
         enabled: yes
 
+- name: Copiar elasticsearch.yml
+  become: yes
+  copy:
+        src: elasticsearch.yml
+        dest: /etc/elasticsearch/elasticsearch.yml
+        mode: '0644'
+        owner: root
+        group: root
+
+- name: Reiniciar el servicio de Elasticsearch
+  become: yes
+  systemd:
+        state: restarted
+        name: elasticsearch.service

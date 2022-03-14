@@ -18,7 +18,7 @@ DISK_NUMBER=0
           node.vm.network "forwarded_port", guest: 80, host: "80"
         end
           node.vm.provider "virtualbox" do |vb|
-        if i==2
+        if i==2 || i==3
           vb.memory = "1500"
         else
           vb.memory = "350"

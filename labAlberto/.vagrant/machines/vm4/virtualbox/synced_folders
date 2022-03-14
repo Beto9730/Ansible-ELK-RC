@@ -1,1 +1,1 @@
-{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/Users/AURQUIZA/labAlberto","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/Users/aurquiza/Documents/Ansible-ELK-RC/labAlberto","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

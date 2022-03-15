@@ -1,4 +1,4 @@
-# ======================== Elasticsearch Configuration =========================    
+# ======================== Elasticsearch Configuration =========================
 #
 # NOTE: Elasticsearch comes with reasonable defaults for most settings.
 #       Before you set out to tweak and tune the configuration, make sure you       
@@ -54,6 +54,7 @@ path.logs: /var/log/elasticsearch
 # address here to expose this node on the network:
 #
 network.host: 10.0.0.12
+#1
 #
 # By default Elasticsearch listens for HTTP traffic on the first free port it
 # finds starting at 9200. Set a specific HTTP port here:
@@ -77,43 +78,20 @@ cluster.initial_master_nodes: ["vm2"]
 #
 # ---------------------------------- Various -----------------------------------
 #
-# Allow wildcard deletion of indices:
+# Require explicit names when deleting indices:
 #
-#action.destructive_requires_name: false
-
-#----------------------- BEGIN SECURITY AUTO CONFIGURATION -----------------------
+#action.destructive_requires_name: true
 #
-# The following settings, TLS certificates, and keys have been automatically
-# generated to configure Elasticsearch security features on 09-03-2022 22:46:11
+# ---------------------------------- Security ----------------------------------
 #
-# --------------------------------------------------------------------------------
-
-# Enable security features
-xpack.security.enabled: false
-
-xpack.security.enrollment.enabled: true
-
-# Enable encryption for HTTP API client connections, such as Kibana, Logstash, and Agents
-xpack.security.http.ssl:
-  enabled: true
-  keystore.path: certs/http.p12
-
-# Enable encryption and mutual authentication between cluster nodes
-xpack.security.transport.ssl:
-  enabled: true
-  verification_mode: certificate
-  keystore.path: certs/transport.p12
-  truststore.path: certs/transport.p12
-# Create a new cluster with the current node only
-# Additional nodes can still join the cluster later
-cluster.initial_master_nodes: ["vm2"]
-
-# Allow HTTP API connections from localhost and local networks
-# Connections are encrypted and require user authentication
-http.host: [_local_, _site_]
-
-# Allow other nodes to join the cluster from localhost and local networks
-# Connections are encrypted and mutually authenticated
-#transport.host: [_local_, _site_]
-
-#----------------------- END SECURITY AUTO CONFIGURATION -------------------------
+#                                 *** WARNING ***
+#
+# Elasticsearch security features are not enabled by default.
+# These features are free, but require configuration changes to enable them.
+# This means that users don’t have to provide credentials and can get full access
+# to the cluster. Network connections are also not encrypted.
+#
+# To protect your data, we strongly encourage you to enable the Elasticsearch security features.
+# Refer to the following documentation for instructions.
+#
+# https://www.elastic.co/guide/en/elasticsearch/reference/7.16/configuring-stack-security.html

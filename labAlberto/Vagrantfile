@@ -10,7 +10,6 @@ DISK_NUMBER=0
         node.vm.box = "centos/7"
         node.vm.hostname = "vm#{i}"
         node.vm.network :private_network, ip: "10.0.0.1#{i}"
-
         if i==3
           node.vm.network "forwarded_port", guest: 5601, host: 5601
         end
@@ -50,11 +49,12 @@ DISK_NUMBER=0
             echo "corriendo playbook"
             cd /vagrant/ansible && ansible-playbook -i inventory site-playbook.yml
           SHELL
-        end
+        else
           node.vm.provision "shell", inline: <<-SHELL
             sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
             systemctl restart sshd.service
           SHELL
+        end 
           vb.cpus = 1
       vb.customize ["storagectl", :id, "--name", "SATA Controller", "--add", "sata", "--controller", "IntelAHCI"] 
   ######

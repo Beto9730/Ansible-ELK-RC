@@ -14,6 +14,16 @@ Herramientas usadas:
 ```
 vagrant up --provision
 ```
+*NOTA:* una vez nuestro laboratorio haya desplegado tendremos que ingresar a la interfaz de "Kibana" a traves del siguiente link: localhost:5601.Luego de esto realizar los siguientes pasos: 
+
+- Nos dirigimos a “Management” y escribimos el nombre de nuestro índice en la sección “Index pattern”
+- Establecemos “syslog-*” para que de esa forma agrupe todos los índices con el nombre de “syslog” sin importar la fecha de creación.
+- Damos clic al botón “Next step”, y en la siguiente vista nos pedirá un filtro de fecha y hora.
+- Seleccionamos “@timestamp”. Y finalizamos con “Create index pattern”
+- Ahora nos dirigimos a la sección de “Discover” y podemos observar todos nuestros registros insertados.
+
+Esta configuración fue realizada para el monitoreo de log de forma local; por otra parte, podemos configurar un agente en cada servidor cliente, para que inicie el envió de sus logs al Logstash o Elasticsearch, y de esa forma tener un ambiente centralizado de Logs.
+
 2. En nuestro Vagrantfile tenemos toda la configuración de todas nuestras maquinas virtuales y los comandos a ejecutar. En primer lugar observamos:
 
 - Vagrant.configure(2) do |config| = Configuracion de Vagrant 

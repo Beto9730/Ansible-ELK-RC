@@ -4,9 +4,9 @@
 - Vagrant Aprovisionamiento 
 - Ansible Modules 
 
-1. Relacion de Confianza (cómo ejecutar ssh-keygen sin aviso?)
+1. Relación de Confianza (cómo ejecutar ssh-keygen sin aviso?)
 
-Automatizando la generacion de clave privada 
+Automatizando la generación de clave privada 
 ```
 su - vagrant -c "ssh-keygen -q -t rsa -N '' -f /home/vagrant/.ssh/id_rsa"
 ```
@@ -42,7 +42,7 @@ Chef
             sudo ansible --version
 
 ```
-Como explicamos anteriormente usaremos el aprovisionamiento SHELL dentro de nuestro Vagrantfile para ejecutar y automatizar la tarea de instalar Ansile en nuestro nodo "bastion" esto para que nosotros no tengamos que hacer nada.
+Como explicamos anteriormente usaremos el aprovisionamiento SHELL dentro de nuestro Vagrantfile para ejecutar y automatizar la tarea de instalar Ansible en nuestro nodo "bastion" esto para que nosotros no tengamos que hacer nada.
 
 3. Modulos de Ansible, en este laboratorio usaremos.
 
@@ -53,7 +53,7 @@ Como explicamos anteriormente usaremos el aprovisionamiento SHELL dentro de nues
 - Service
 - Systemd
 
-A continuacion una breve deficion de cada uno y un ejemplo para ver en que caso usaremos en nuestro laboratorio.
+A continuación una breve definición de cada uno y un ejemplo para ver en que caso usaremos en nuestro laboratorio.
 
 - Copy ._ El "Copy" copia un archivo de la máquina local o remota a una ubicación en la máquina remota.
 ```
@@ -85,16 +85,16 @@ Usamos Shell para descargar el rpm de elasticsearch con  el argumento "wget"
   with_file:
     - keyvm4
 
-Configura la llave privada que previaremente generaremos *(cómo ejecutar ssh-keygen sin aviso?)* revisar punto 1 ,  una vez generada se guarda como item "keyvm4" y esta llave se configura de manera automatica en los nodos restantes en su .ssh/authorizedkeys
+Configura la llave privada que previamente generaremos *(cómo ejecutar ssh-keygen sin aviso?)* revisar punto 1 ,  una vez generada se guarda como item "keyvm4" y esta llave se configura de manera automatica en los nodos restantes en la ruta .ssh/authorizedkeys
 ```
-- Yum ._ Instala, actualiza, degrada, elimina y enumera paquetes y grupos con el administrador de paquetes yum.
+- Yum ._ Instala, actualiza, elimina y enumera paquetes y grupos con el administrador de paquetes yum.
 ```
 - name: Install elastic
   yum:
     name: elasticsearch-7.17.1-x86_64
     state: present
 
-Usamoa el modulo de Yum para descargar elasticsearch puesto que nuestro distribucion es Centos y podremos realizar la gestion gracias a este modulo.
+Usamos el modulo de Yum para descargar elasticsearch puesto que nuestra distribución es Centos y podremos realizar la gestion gracias a este modulo.
 ```
 - Service ._ Controla servicios en hosts remotos.
 ```
@@ -104,5 +104,5 @@ Usamoa el modulo de Yum para descargar elasticsearch puesto que nuestro distribu
         name: elasticsearch.service
         state: restarted
 
-En este caso se utitliza el modulo service para reiniciar el servicio de elasticsearch.service
+En este caso se utiliza el modulo service para reiniciar el servicio de elasticsearch.service
 ```
